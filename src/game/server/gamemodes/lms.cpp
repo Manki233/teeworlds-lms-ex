@@ -11,7 +11,7 @@
 CGameControllerLMS::CGameControllerLMS() :
 	IGameController()
 {
-	m_pGameType = "LMS";
+	m_pGameType = "LMS-EX";
 	m_GameFlags = IGF_SURVIVAL | IGF_ROUND_TIMER_ROUND | IGF_SUDDENDEATH;
 
 	INSTANCE_CONFIG_INT(&m_SpawnArmor, "spawn_armor", 5, 0, 10, CFGFLAG_CHAT | CFGFLAG_INSTANCE, "Maximum room size (from 2 to 64)")
@@ -43,15 +43,15 @@ void CGameControllerLMS::OnWorldReset()
 
 void CGameControllerLMS::OnCharacterSpawn(CCharacter *pChr)
 {
-	pChr->IncreaseHealth(10);
-	pChr->IncreaseArmor(m_SpawnArmor);
+	pChr->IncreaseHealth(20);
+	pChr->IncreaseArmor(20);
 
 	// give start equipment
 	pChr->GiveWeapon(WEAPON_GUN, WEAPON_ID_PISTOL, 10);
 	pChr->GiveWeapon(WEAPON_HAMMER, WEAPON_ID_HAMMER, -1);
 	pChr->GiveWeapon(WEAPON_SHOTGUN, WEAPON_ID_SHOTGUN, 10);
-	pChr->GiveWeapon(WEAPON_GRENADE, WEAPON_ID_GRENADE, 10);
-	pChr->GiveWeapon(WEAPON_LASER, WEAPON_ID_LASER, 5);
+	pChr->GiveWeapon(WEAPON_GRENADE, WEAPON_ID_GRENADE, 20);
+	pChr->GiveWeapon(WEAPON_LASER, WEAPON_ID_LASER, 20);
 }
 
 bool CGameControllerLMS::OnEntity(int Index, vec2 Pos, int Layer, int Flags, int Number)

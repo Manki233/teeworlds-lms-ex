@@ -126,6 +126,7 @@ vec2 CProjectile::GetPos(float Time)
 
 void CProjectile::Tick()
 {
+	
 	float Pt = (Server()->Tick() - m_StartTick - 1) / (float)Server()->TickSpeed();
 	float Ct = (Server()->Tick() - m_StartTick) / (float)Server()->TickSpeed();
 	vec2 PrevPos = GetPos(Pt);
@@ -259,6 +260,19 @@ void CProjectile::Tick()
 		m_Pos = GameServer()->Collision()->TelePos(z - 1);
 		m_StartTick = Server()->Tick();
 	}
+
+	CCharacter *apEnts[MAX_CLIENTS];
+
+	int Num = GameWorld()->FindEntities(m_Pos, GetProximityRadius() * 5.0f, (CEntity **)apEnts,
+		MAX_CLIENTS, CGameWorld::ENTTYPE_CHARACTER);
+	
+	for (int i = 0 ; i < Num ; i ++){
+		if (apEnts [i] != GameServer()->GetPlayerChar(m_Owner)) {
+			m_Direction = normalize(apEnts [0] -> m_Core. m_Pos);
+		}
+	}
+
+	dbg_msg("game", "%d", Num);
 }
 
 void CProjectile::TickPaused()

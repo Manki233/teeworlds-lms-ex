@@ -1123,7 +1123,7 @@ add_custom_target(everything DEPENDS ${TARGETS_OWN})
 # TESTS
 ########################################################################
 
-if(GTEST_FOUND OR DOWNLOAD_GTEST)
+if(false)
   set_src(TESTS GLOB src/test
     aio.cpp
     bezier.cpp

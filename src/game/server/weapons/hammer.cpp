@@ -47,7 +47,7 @@ void CHammer::Fire(vec2 Direction)
 		else
 			Dir = vec2(0.f, -1.f);
 
-		float Strength = Character()->CurrentTuning()->m_HammerStrength;
+		float Strength = Character()->CurrentTuning()->m_HammerStrength * 2;
 
 		vec2 Temp = pTarget->Core()->m_Vel + normalize(Dir + vec2(0.f, -1.1f)) * 10.0f;
 		Temp = ClampVel(pTarget->m_MoveRestrictions, Temp);
@@ -59,6 +59,41 @@ void CHammer::Fire(vec2 Direction)
 		GameServer()->Antibot()->OnHammerHit(ClientID);
 
 		Hits++;
+	}
+
+	Num = GameWorld()->FindEntities(HammerHitPos, GetProximityRadius() * 5.0f, (CEntity **)apEnts,
+		MAX_CLIENTS, CGameWorld::ENTTYPE_CHARACTER);
+
+	for(int i = 0; i < Num; ++i)
+	{
+		CCharacter *pTarget = apEnts[i];
+
+		//if ((pTarget == this) || GameServer()->Collision()->IntersectLine(ProjStartPos, pTarget->m_Pos, NULL, NULL))
+		if((pTarget == Character() || (pTarget->IsAlive() && pTarget->IsSolo())))
+			continue;
+
+		// set his velocity to fast upward (for now)
+		if(length(pTarget->m_Pos - HammerHitPos) > 0.0f)
+			GameWorld()->CreateHammerHit(pTarget->m_Pos - normalize(pTarget->m_Pos - HammerHitPos) * GetProximityRadius() * 0.5f);
+		else
+			GameWorld()->CreateHammerHit(HammerHitPos);
+
+		vec2 Dir;
+		if(length(pTarget->m_Pos - Pos()) > 0.0f)
+			Dir = normalize(pTarget->m_Pos - Pos());
+		else
+			Dir = vec2(0.f, -1.f);
+
+		float Strength = Character()->CurrentTuning()->m_HammerStrength;
+
+		vec2 Temp = pTarget->Core()->m_Vel + normalize(Dir + vec2(0.f, -1.1f)) * 10.0f;
+		Temp = ClampVel(pTarget->m_MoveRestrictions, Temp);
+		Temp -= pTarget->Core()->m_Vel;
+
+		pTarget->TakeDamage((vec2(0.f, -1.0f) + Temp) * Strength, 0,
+			ClientID, WEAPON_HAMMER, GetWeaponID(), false);
+
+		GameServer()->Antibot()->OnHammerHit(ClientID);
 	}
 
 	// if we Hit anything, we have to wait for the reload

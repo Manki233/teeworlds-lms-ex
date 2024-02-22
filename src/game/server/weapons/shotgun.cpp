@@ -26,7 +26,7 @@ bool CShotgun::BulletCollide(CProjectile *pProj, vec2 Pos, CCharacter *pHit, boo
 
 void CShotgun::Fire(vec2 Direction)
 {
-	int ShotSpread = 2;
+	int ShotSpread = 5;
 	int ClientID = Character()->GetPlayer()->GetCID();
 	int Lifetime = Character()->CurrentTuning()->m_ShotgunLifetime * Server()->TickSpeed();
 
@@ -37,9 +37,14 @@ void CShotgun::Fire(vec2 Direction)
 
 	for(int i = -ShotSpread; i <= ShotSpread; ++i)
 	{
-		float Spreading[] = {-0.185f, -0.070f, 0, 0.070f, 0.185f};
+		float Spreading[] = {-0.7f};
+
+		for (int j = 0 ; j <= ShotSpread * 2 + 1 ; ++j)
+		{
+			Spreading[i] = i * 1.4f / (ShotSpread * 2 + 1);
+		}
 		float a = angle(Direction);
-		a += Spreading[i + 2];
+		a += Spreading[i + 3];
 		float v = 1 - (absolute(i) / (float)ShotSpread);
 		float Speed = mix((float)GameServer()->Tuning()->m_ShotgunSpeeddiff, 1.0f, v);
 		CProjectile *pProj = new CProjectile(
