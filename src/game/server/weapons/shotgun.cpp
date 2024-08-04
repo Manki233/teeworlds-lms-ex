@@ -6,7 +6,7 @@ CShotgun::CShotgun(CCharacter *pOwnerChar) :
 	CWeapon(pOwnerChar)
 {
 	m_MaxAmmo = g_pData->m_Weapons.m_aId[WEAPON_SHOTGUN].m_Maxammo;
-	m_AmmoRegenTime = g_pData->m_Weapons.m_aId[WEAPON_SHOTGUN].m_Ammoregentime;
+	m_AmmoRegenTime = 1400;
 	m_FireDelay = g_pData->m_Weapons.m_aId[WEAPON_SHOTGUN].m_Firedelay;
 	m_FullAuto = true;
 }

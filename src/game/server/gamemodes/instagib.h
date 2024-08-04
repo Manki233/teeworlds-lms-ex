@@ -105,22 +105,22 @@ public:
 			((CExplodingLaser *)pStartingWeapon)->SetMaxExplosions(m_LaserJump);
 	};
 
-	virtual int OnCharacterTakeDamage(class CCharacter *pChr, vec2 &Force, int &Dmg, int From, int Weapon, int WeaponType, bool IsExplosion) override
-	{
-		// ignore invalid damage (i.e. friendly fire)
-		if(Dmg <= 0)
-			return DAMAGE_SKIP;
-
-		// no self damage
-		if(pChr->GetPlayer()->GetCID() == From)
-		{
-			if(IsExplosion)
-			{
-				if(m_WeaponAmmoRegenOnBoost && length(Force) > 11.0f)
-				{
-					CWeapon *pWeapon = pChr->GetWeapon(WEAPON_LASER);
-					if(pWeapon)
-						pWeapon->GiveAmmo(1);
+	/* virtual int OnCharacterTakeDamage(class CCharacter *pChr, vec2 &Force, int &Dmg, int From, int Weapon, int WeaponType, bool IsExplosion) override
+	// {
+	// 	// ignore invalid damage (i.e. friendly fire)
+	// 	if(Dmg <= 0)
+	// 		return DAMAGE_SKIP;
+// 
+// 		// no self damage
+// 		if(pChr->GetPlayer()->GetCID() == From)
+// 		{
+// 			if(IsExplosion)
+// 			{
+// 				if(m_WeaponAmmoRegenOnBoost && length(Force) > 11.0f)
+// 				{
+// 					CWeapon *pWeapon = pChr->GetWeapon(WEAPON_LASER);
+// 					if(pWeapon)
+	// 					pWeapon->GiveAmmo(1);
 				}
 
 				return DAMAGE_NO_DAMAGE | DAMAGE_NO_INDICATOR | DAMAGE_NO_PAINSOUND;
@@ -138,7 +138,7 @@ public:
 
 		pChr->Die(From, Weapon);
 		return DAMAGE_DIED | DAMAGE_NO_INDICATOR | DAMAGE_NO_PAINSOUND;
-	};
+	};*/
 
 	virtual bool OnEntity(int Index, vec2 Pos, int Layer, int Flags, int Number) override
 	{

@@ -101,6 +101,8 @@ public:
 	virtual bool IgnoreHookDrag() { return false; }
 	// powerup progress, only used for progress indicator (0~1, 0 being just started, 1 being finished)
 	virtual float PowerupProgress() { return 0.0f; }
+
+	virtual void OnTick();
 };
 
 #endif // GAME_SERVER_WEAPON_H

@@ -458,6 +458,7 @@ void CCharacterCore::Move()
 
 	vec2 OldVel = m_Vel;
 	m_pCollision->MoveBox(&NewPos, &m_Vel, vec2(28.0f, 28.0f), 0);
+//	m_pCollision->MoveBox(&NewPos, &m_Vel, vec2(14.0f, 14.0f), 0);
 
 	m_Colliding = 0;
 	if(m_Vel.x < 0.001f && m_Vel.x > -0.001f)
@@ -471,6 +472,8 @@ void CCharacterCore::Move()
 		m_LeftWall = true;
 
 	m_Vel.x = m_Vel.x * (1.0f / RampValue);
+//	m_Vel.x /= 2;
+//	m_Vel.y /= 2;
 
 	if(m_pWorld && (m_Super || (m_pWorld->m_Tuning.m_PlayerCollision && m_Collision && !m_NoCollision && !m_Solo)))
 	{

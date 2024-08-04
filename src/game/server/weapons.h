@@ -5,9 +5,21 @@ REGISTER_WEAPON(WEAPON_ID_PISTOL, CPistol)
 REGISTER_WEAPON(WEAPON_ID_SHOTGUN, CShotgun)
 REGISTER_WEAPON(WEAPON_ID_GRENADE, CGrenade)
 REGISTER_WEAPON(WEAPON_ID_LASER, CLaserGun)
-REGISTER_WEAPON(WEAPON_ID_NINJA, CNinja)
+
+REGISTER_WEAPON(WEAPON_ID_PHAMMER, CPHammer)
 
 REGISTER_WEAPON(WEAPON_ID_EXPLODINGLASER, CExplodingLaser)
+
+REGISTER_WEAPON(WEAPON_ID_HSHOTGUN, CHShotgun)
+REGISTER_WEAPON(WEAPON_ID_EHAMMER, CEHammer)
+
+REGISTER_WEAPON(WEAPON_ID_PPISTOL, CPPistol)
+
+REGISTER_WEAPON(WEAPON_ID_MGRENADE, CMGrenade)
+
+REGISTER_WEAPON(WEAPON_ID_LASERAREA, CLaserGunArea)
+
+REGISTER_WEAPON(WEAPON_ID_NINJA, CNinja)
 
 #else
 
@@ -15,11 +27,16 @@ REGISTER_WEAPON(WEAPON_ID_EXPLODINGLASER, CExplodingLaser)
 #define GAME_SERVER_WEAPONS_H
 
 #include "weapons/grenade.h"
+#include "weapons/mgrenade.h"
 #include "weapons/hammer.h"
 #include "weapons/lasergun.h"
 #include "weapons/ninja.h"
 #include "weapons/pistol.h"
 #include "weapons/shotgun.h"
+#include "weapons/hshotgun.h"
+#include "weapons/ehammer.h"
+#include "weapons/phammer.h"
+#include "weapons/ppistol.h"
 
 #include "weapons/explodinglaser.h"
 

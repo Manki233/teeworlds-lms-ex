@@ -16,8 +16,11 @@ public:
 	virtual void OnWorldReset() override;
 	virtual void OnCharacterSpawn(class CCharacter *pChr) override;
 	virtual bool OnEntity(int Index, vec2 Pos, int Layer, int Flags, int Number) override;
+	virtual void OnPreTick() override;
 	// game
 	virtual void DoWincheckRound() override;
+
+	int m_ReadyTime;
 };
 
 #endif

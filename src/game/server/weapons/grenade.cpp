@@ -6,17 +6,41 @@ CGrenade::CGrenade(CCharacter *pOwnerChar) :
 	CWeapon(pOwnerChar)
 {
 	m_MaxAmmo = g_pData->m_Weapons.m_aId[WEAPON_GRENADE].m_Maxammo;
-	m_AmmoRegenTime = g_pData->m_Weapons.m_aId[WEAPON_GRENADE].m_Ammoregentime;
+	m_AmmoRegenTime = 1400;
 	m_FireDelay = g_pData->m_Weapons.m_aId[WEAPON_GRENADE].m_Firedelay;
 	m_FullAuto = true;
 }
 
 bool CGrenade::GrenadeCollide(CProjectile *pProj, vec2 Pos, CCharacter *pHit, bool EndOfLife)
 {
-	if(pHit && pHit->GetPlayer()->GetCID() == pProj->GetOwner())
+	if(pHit && pHit->GetPlayer()->GetCID() == pProj->GetOwner()) {
 		return false;
+	}
 
-	pProj->GameWorld()->CreateExplosion(Pos, pProj->GetOwner(), WEAPON_GRENADE, pProj->GetWeaponID(), g_pData->m_Weapons.m_aId[WEAPON_GRENADE].m_Damage, pProj->GetOwner() < 0);
+	CCharacter *apEnts[MAX_CLIENTS];
+
+	float Radius = 135.0f;
+
+	int Num = pProj->GameWorld()->FindEntities(Pos, Radius, (CEntity **)apEnts, MAX_CLIENTS, CGameWorld::ENTTYPE_CHARACTER);
+
+	int own = -1;
+	
+	for(int i = 0; i < Num; i++)
+	{
+		if (apEnts[i]->GetPlayer()->GetCID() == pProj->GetOwner())
+		{
+			apEnts[i]->IncreaseHealth(3);
+			apEnts[i]->IncreaseArmor(3);
+			own = i;
+		}
+	}
+
+	if (own != -1)
+	{
+		apEnts[own]->IncreaseArmor(3);
+	}
+
+	pProj->GameWorld()->CreateExplosion(Pos, pProj->GetOwner(), WEAPON_GRENADE, pProj->GetWeaponID(), g_pData->m_Weapons.m_aId[WEAPON_GRENADE].m_Damage / 2, pProj->GetOwner() < 0);
 	pProj->GameWorld()->CreateSound(Pos, SOUND_GRENADE_EXPLODE);
 
 	return true;

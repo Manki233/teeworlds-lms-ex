@@ -6,6 +6,7 @@
 #include <game/mapitems.h>
 #include <game/server/gamecontext.h>
 #include <game/server/player.h>
+#include <stdlib.h>
 #include <new>
 
 #include "character.h"
@@ -35,6 +36,8 @@ CCharacter::CCharacter(CGameWorld *pWorld) :
 	m_IsFiring = false;
 
 	m_LatestPrevPrevInput = m_LatestPrevInput = m_LatestInput = m_PrevInput = m_SavedInput = m_Input;
+
+	m_dHealth = 0.0f;
 }
 
 CCharacter::~CCharacter()
@@ -456,6 +459,7 @@ void CCharacter::Tick()
 			Antibot()->OnHookAttach(m_pPlayer->GetCID(), true);
 		}
 	}
+		
 
 	// Previnput
 	m_PrevInput = m_Input;
@@ -622,6 +626,13 @@ void CCharacter::Die(int Killer, int Weapon)
 	m_pPlayer->m_RespawnTick = Server()->Tick() + Server()->TickSpeed() / 2;
 	m_Solo = false;
 
+	if (Killer >= 0 && GameServer()->m_apPlayers[Killer] && GameServer()->GetPlayerChar(Killer) && GameServer()->GetPlayerChar(Killer)->IsAlive())
+	{
+		GameServer()->GetPlayerChar(Killer)->IncreaseHealth(5);
+		GameServer()->GetPlayerChar(Killer)->IncreaseArmor(5);
+	}
+
+
 	GameWorld()->RemoveEntity(this);
 	GameWorld()->m_Core.m_apCharacters[m_pPlayer->GetCID()] = 0;
 	GameWorld()->CreateDeath(m_Pos, m_pPlayer->GetCID());
@@ -639,11 +650,23 @@ void CCharacter::Die(int Killer, int Weapon)
 	GameServer()->Console()->Print(IConsole::OUTPUT_LEVEL_DEBUG, "game", aBuf);
 }
 
-bool CCharacter::TakeDamage(vec2 Force, int Dmg, int From, int Weapon, int WeaponID, bool IsExplosion)
+bool CCharacter::TakeDamage(vec2 Force, float Dmg, int From, int Weapon, int WeaponID, bool IsExplosion)
 {
+	if (Force. x == 942.0f)
+	{
+		auto cchar = GameServer()->GetPlayerChar(From);
+		
+		if (cchar && (rand () % 2 == 0))
+		{
+			cchar->IncreaseHealth(4);
+			cchar->IncreaseArmor(2);
+		}
+
+		Force. x = 0;
+	}
 	// m_pPlayer only inflicts half damage on self
 	if(From == m_pPlayer->GetCID())
-		Dmg = maximum(1, Dmg / 2);
+		Dmg = maximum(1, (int) Dmg / 2);
 
 	if(From >= 0)
 	{
@@ -653,6 +676,10 @@ bool CCharacter::TakeDamage(vec2 Force, int Dmg, int From, int Weapon, int Weapo
 
 	if(m_ProtectTick > 0)
 		Dmg = 0;
+
+	Dmg = Dmg * m_DamageScale;
+
+	Force = vec2(Force. x * m_DamageScale, Force. y * m_DamageScale);
 
 	int DamageFlag = Controller()->OnCharacterTakeDamage(this, Force, Dmg, From, Weapon, WeaponID, IsExplosion);
 
@@ -676,45 +703,55 @@ bool CCharacter::TakeDamage(vec2 Force, int Dmg, int From, int Weapon, int Weapo
 		if(Server()->Tick() < m_DamageTakenTick + 25)
 		{
 			// make sure that the damage indicators doesn't group together
-			GameWorld()->CreateDamageInd(m_Pos, m_DamageTaken * 0.25f, Dmg);
+			GameWorld()->CreateDamageInd(m_Pos, m_DamageTaken * 0.25f, (int)Dmg);
 		}
 		else
 		{
 			m_DamageTaken = 0;
-			GameWorld()->CreateDamageInd(m_Pos, 0, Dmg);
+			GameWorld()->CreateDamageInd(m_Pos, 0, (int)Dmg);
 		}
 	}
 
 	if(!(DamageFlag & DAMAGE_NO_DAMAGE))
 	{
-		if(Dmg > 0)
+		if (Dmg != (int) Dmg)
+		{
+			m_dHealth += Dmg - (int) Dmg;
+			if (m_dHealth >= 1)
+			{
+				Dmg += (int)m_dHealth;
+				m_dHealth = 0;
+			}
+		}
+		
+		if((int)Dmg > 0)
 		{
 			if(m_Armor)
 			{
-				if(Dmg > 1)
+				if((int)Dmg > 1)
 				{
 					m_Health--;
 					Dmg--;
 				}
 
-				if(Dmg > m_Armor)
+				if((int)Dmg > m_Armor)
 				{
 					Dmg -= m_Armor;
 					m_Armor = 0;
 				}
 				else
 				{
-					m_Armor -= Dmg;
+					m_Armor -= (int)Dmg;
 					Dmg = 0;
 				}
 			}
 
-			m_Health -= Dmg;
+			m_Health -= (int)Dmg;
 		}
 
 		if(Dmg < 0)
 		{
-			m_Health = clamp(m_Health - Dmg, 0, 10);
+			m_Health = clamp(m_Health - (int)Dmg, 0, 10);
 		}
 
 		m_DamageTakenTick = Server()->Tick();

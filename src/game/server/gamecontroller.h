@@ -10,6 +10,8 @@
 #include <game/generated/protocol.h>
 #include <game/voting.h>
 
+#include "giveweapons.h"
+
 #include <map>
 #include <vector>
 
@@ -722,7 +724,7 @@ public:
 		Result:
 			A flag (DAMAGE_*) indicating the behaviour of the damage
 	*/
-	virtual int OnCharacterTakeDamage(class CCharacter *pChr, vec2 &Force, int &Dmg, int From, int WeaponType, int WeaponID, bool IsExplosion) { return DAMAGE_NORMAL; };
+	virtual int OnCharacterTakeDamage(class CCharacter *pChr, vec2 &Force, float &Dmg, int From, int WeaponType, int WeaponID, bool IsExplosion) { return DAMAGE_NORMAL; };
 
 	/*
 		Function: OnCharacterTile

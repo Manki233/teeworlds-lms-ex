@@ -80,7 +80,7 @@ public:
 	void FireWeapon();
 
 	void Die(int Killer, int Weapon);
-	bool TakeDamage(vec2 Force, int Dmg, int From, int Weapon, int WeaponType, bool IsExplosion);
+	bool TakeDamage(vec2 Force, float Dmg, int From, int Weapon, int WeaponType, bool IsExplosion);
 
 	bool Spawn(class CPlayer *pPlayer, vec2 Pos);
 	bool Remove();
@@ -104,7 +104,14 @@ public:
 	class CPlayer *GetPlayer() { return m_pPlayer; }
 
 	CCharacterCore m_Core;
+	
+	int m_Health;
 
+	float m_dHealth;
+	
+	int m_Armor;
+
+	float m_DamageScale = 1.0f;
 private:
 	// player controlling this character
 	class CPlayer *m_pPlayer;
@@ -144,9 +151,6 @@ private:
 	int m_Jumped;
 
 	int m_DamageTakenTick;
-
-	int m_Health;
-	int m_Armor;
 
 	// the player core for the physics
 

@@ -6,7 +6,7 @@ CLaserGun::CLaserGun(CCharacter *pOwnerChar) :
 	CWeapon(pOwnerChar)
 {
 	m_MaxAmmo = 20;
-	m_AmmoRegenTime = 500;
+	m_AmmoRegenTime = 265;
 	m_FireDelay = 70;
 	m_FullAuto = true;
 
@@ -20,9 +20,9 @@ bool CLaserGun::LaserHit(CLaser *pLaser, vec2 HitPoint, CCharacter *pHit, bool O
 		if(pHit->GetPlayer()->GetCID() == pLaser->GetOwner())
 			return false;
 
-		pLaser->GameWorld()->CreateExplosionParticle(HitPoint, pLaser->GetOwner() < 0);
+//		pLaser->GameWorld()->CreateExplosionParticle(HitPoint);
 		pLaser->GameWorld()->CreateSound(HitPoint, SOUND_GRENADE_EXPLODE);
-		pHit->TakeDamage(vec2(0, 0), 1, pLaser->GetOwner(), WEAPON_LASER, pLaser->GetWeaponID(), false);
+		pHit->TakeDamage(vec2(0, 0), 2, pLaser->GetOwner(), WEAPON_LASER, pLaser->GetWeaponID(), false);
 		return true;
 	}
 

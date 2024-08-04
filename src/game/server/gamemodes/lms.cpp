@@ -8,6 +8,8 @@
 #include <game/server/player.h>
 #include <game/server/weapons.h>
 
+#include <game/server/entities/circle.h>
+
 CGameControllerLMS::CGameControllerLMS() :
 	IGameController()
 {
@@ -19,9 +21,9 @@ CGameControllerLMS::CGameControllerLMS() :
 
 // event
 void CGameControllerLMS::OnWorldReset()
-{
+{	
 	// only spawn topscore players on suddon death round
-	if(m_SuddenDeath)
+	if(m_SuddenDeath && m_ReadyTime <= 1)
 	{
 		int Topscore = 0;
 		for(int i = 0; i < MAX_CLIENTS; i++)
@@ -39,6 +41,14 @@ void CGameControllerLMS::OnWorldReset()
 				pPlayer->CancelSpawn();
 		}
 	}
+
+	if (m_ReadyTime == 0)
+		m_ReadyTime = 60 * 30;
+}
+
+void CGameControllerLMS::OnPreTick()
+{
+
 }
 
 void CGameControllerLMS::OnCharacterSpawn(CCharacter *pChr)
@@ -46,12 +56,11 @@ void CGameControllerLMS::OnCharacterSpawn(CCharacter *pChr)
 	pChr->IncreaseHealth(20);
 	pChr->IncreaseArmor(20);
 
-	// give start equipment
-	pChr->GiveWeapon(WEAPON_GUN, WEAPON_ID_PISTOL, 10);
-	pChr->GiveWeapon(WEAPON_HAMMER, WEAPON_ID_HAMMER, -1);
-	pChr->GiveWeapon(WEAPON_SHOTGUN, WEAPON_ID_SHOTGUN, 10);
-	pChr->GiveWeapon(WEAPON_GRENADE, WEAPON_ID_GRENADE, 20);
-	pChr->GiveWeapon(WEAPON_LASER, WEAPON_ID_LASER, 20);
+//	pChr->GetPlayer()->m_PickWeapons [1] = WEAPON_ID_PISTOL;
+//	pChr->GetPlayer()->m_PickWeapons [2] = WEAPON_ID_HAMMER;
+//	pChr->GetPlayer()->m_PickWeapons [3] = WEAPON_ID_SHOTGUN;
+//	pChr->GetPlayer()->m_PickWeapons [4] = WEAPON_ID_GRENADE;
+//	pChr->GetPlayer()->m_PickWeapons [5] = WEAPON_ID_LASER;
 }
 
 bool CGameControllerLMS::OnEntity(int Index, vec2 Pos, int Layer, int Flags, int Number)
@@ -65,6 +74,22 @@ bool CGameControllerLMS::OnEntity(int Index, vec2 Pos, int Layer, int Flags, int
 // game
 void CGameControllerLMS::DoWincheckRound()
 {
+	int PlayerCount = 0;
+	
+	for(int i = 0; i < MAX_CLIENTS; ++i)
+	{
+		CPlayer *pPlayer = GetPlayerIfInRoom(i);
+		if(pPlayer)
+		{
+			++PlayerCount;
+		}
+	}
+
+	if (PlayerCount == 0)
+	{
+		return ;
+	}
+	
 	// check for time based win
 	if(!m_SuddenDeath && m_GameInfo.m_TimeLimit > 0 && (Server()->Tick() - m_GameStartTick) >= m_GameInfo.m_TimeLimit * Server()->TickSpeed() * 60)
 	{

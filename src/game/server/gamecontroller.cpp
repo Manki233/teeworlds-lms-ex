@@ -20,9 +20,59 @@
 #include "entities/plasma.h"
 #include "entities/projectile.h"
 #include "weapons.h"
+
+#include "giveweapons.h"
 #include <game/layers.h>
 
 #include <engine/server/server.h>
+
+void GiveWeapons (CPlayer *pPlayer) {
+	CCharacter *pChr = pPlayer->GetCharacter();
+	
+	for (int i = 1 ; i <= 5 ; i ++)
+	{
+		int weapon_id = pChr->GetPlayer()->m_PickWeapons[i];
+
+		switch (weapon_id) {
+			case WEAPON_ID_HAMMER:
+				pChr->GiveWeapon(WEAPON_HAMMER, WEAPON_ID_HAMMER, -1);
+				break;
+			case WEAPON_ID_PISTOL:
+				pChr->GiveWeapon(WEAPON_GUN, WEAPON_ID_PISTOL, 5);
+				break;
+			case WEAPON_ID_SHOTGUN:
+				pChr->GiveWeapon(WEAPON_SHOTGUN, WEAPON_ID_SHOTGUN, 10);
+				break;
+			case WEAPON_ID_GRENADE:
+				pChr->GiveWeapon(WEAPON_GRENADE, WEAPON_ID_GRENADE, 10);
+				break;
+			case WEAPON_ID_LASER:
+				pChr->GiveWeapon(WEAPON_LASER, WEAPON_ID_LASER, 10);
+				break;
+			case WEAPON_ID_EXPLODINGLASER:
+				pChr->GiveWeapon(WEAPON_LASER, WEAPON_ID_EXPLODINGLASER, 10);
+				break;
+			case WEAPON_ID_HSHOTGUN:
+				pChr->GiveWeapon(WEAPON_SHOTGUN, WEAPON_ID_HSHOTGUN, 10);
+				break;
+			case WEAPON_ID_EHAMMER:
+				pChr->GiveWeapon(WEAPON_HAMMER, WEAPON_ID_EHAMMER, -1);
+				break;
+			case WEAPON_ID_PHAMMER:
+				pChr->GiveWeapon(WEAPON_HAMMER, WEAPON_ID_PHAMMER, -1);
+				break;
+			case WEAPON_ID_PPISTOL:
+				pChr->GiveWeapon(WEAPON_GUN, WEAPON_ID_PPISTOL, 3);
+				break;
+			case WEAPON_ID_MGRENADE:
+				pChr->GiveWeapon(WEAPON_GRENADE, WEAPON_ID_MGRENADE, 10);
+				break;
+//			case WEAPON_ID_NINJA:
+//				pChr->GiveWeapon(WEAPON_NINJA, WEAPON_ID_NINJA, -1);
+//				break;
+		}
+	}
+}
 
 // MYTODO: clean up these static methods
 static void ConchainUpdateCountdown(IConsole::IResult *pResult, void *pUserData, IConsole::FCommandCallback pfnCallback, void *pCallbackUserData)
@@ -419,7 +469,7 @@ IGameController::IGameController()
 
 	m_pInstanceConsole->RegisterPrintCallback(IConsole::OUTPUT_LEVEL_STANDARD, InstanceConsolePrint, this);
 
-	INSTANCE_CONFIG_INT(&m_Warmup, "warmup", 10, 0, 1000, CFGFLAG_CHAT | CFGFLAG_INSTANCE, "Number of seconds to do warmup before match starts");
+	INSTANCE_CONFIG_INT(&m_Warmup, "warmup", 30, 0, 1000, CFGFLAG_CHAT | CFGFLAG_INSTANCE, "Number of seconds to do warmup before match starts");
 	INSTANCE_CONFIG_INT(&m_Countdown, "countdown", 0, -1000, 1000, CFGFLAG_CHAT | CFGFLAG_INSTANCE, "Number of seconds to freeze the game in a countdown before match starts, (-: for survival, +: for all")
 	INSTANCE_CONFIG_INT(&m_Teamdamage, "teamdamage", 0, 0, 2, CFGFLAG_CHAT | CFGFLAG_INSTANCE, "Team damage (1 = half damage, 2 = full damage)")
 	INSTANCE_CONFIG_INT(&m_MatchSwap, "match_swap", 1, 0, 2, CFGFLAG_CHAT | CFGFLAG_INSTANCE, "Swap teams between matches (2 = shuffle team)")
@@ -430,7 +480,7 @@ IGameController::IGameController()
 	INSTANCE_CONFIG_INT(&m_TeambalanceTime, "teambalance_time", 1, 0, 1000, CFGFLAG_CHAT | CFGFLAG_INSTANCE, "How many minutes to wait before autobalancing teams")
 	INSTANCE_CONFIG_INT(&m_KillDelay, "kill_delay", 1, -1, 9999, CFGFLAG_CHAT | CFGFLAG_INSTANCE, "The minimum time in seconds between kills (-1 = disable kill)")
 	INSTANCE_CONFIG_INT(&m_PlayerSlots, "player_slots", MAX_CLIENTS, 2, MAX_CLIENTS, CFGFLAG_CHAT | CFGFLAG_INSTANCE, "Maximum room size (from 2 to 64)")
-	INSTANCE_CONFIG_INT(&m_PlayerReadyMode, "player_ready_mode", 0, 0, 3, CFGFLAG_CHAT | CFGFLAG_INSTANCE, "1 = players can ready to start the game on warmup 2 = players can unready to pause the game, 3 = both")
+	INSTANCE_CONFIG_INT(&m_PlayerReadyMode, "player_ready_mode", 1, 0, 3, CFGFLAG_CHAT | CFGFLAG_INSTANCE, "1 = players can ready to start the game on warmup 2 = players can unready to pause the game, 3 = both")
 	INSTANCE_CONFIG_INT(&m_ResetOnMatchEnd, "reset_on_match_end", 0, 0, 1, CFGFLAG_CHAT | CFGFLAG_INSTANCE, "Whether to reset to the initial state (warmup or wait for ready) after a match.")
 	INSTANCE_CONFIG_INT(&m_PausePerMatch, "pause_per_match", 0, 0, 10, CFGFLAG_CHAT | CFGFLAG_INSTANCE, "Number of pause (using ready state) allowed per player per match")
 	INSTANCE_CONFIG_INT(&m_MinimumPlayers, "minimum_players", 1, 0, MAX_CLIENTS, CFGFLAG_CHAT | CFGFLAG_INSTANCE, "Number of players required to start a match, (0 = the game can't start)")
@@ -679,7 +729,10 @@ void IGameController::OnInternalCharacterSpawn(CCharacter *pChr)
 {
 	// check respawn state
 	pChr->GetPlayer()->m_RespawnDisabled = GetStartRespawnState();
+	
 	OnCharacterSpawn(pChr);
+
+	GiveWeapons (pChr->GetPlayer());
 }
 
 bool IGameController::OnInternalCharacterTile(CCharacter *pChr, int MapIndex)
@@ -1673,9 +1726,9 @@ void IGameController::FakeClientBroadcast(int SnappingClient)
 		char aBuf[128];
 		bool PlayerNeedToReady = pPlayer->GetTeam() != TEAM_SPECTATORS && pPlayer->m_IsReadyToPlay;
 		if(m_NumPlayerNotReady == 1)
-			str_format(aBuf, sizeof(aBuf), "%s\n\n\n%d player not ready", pPlayer->m_IsReadyToPlay ? "" : "Say '/r' to ready", m_NumPlayerNotReady);
+			str_format(aBuf, sizeof(aBuf), "%s\n\n\n%d 个玩家还没有准备好", pPlayer->m_IsReadyToPlay ? "" : "在聊天框发送 '/r' 以准备", m_NumPlayerNotReady);
 		else
-			str_format(aBuf, sizeof(aBuf), "%s\n\n\n%d players not ready", pPlayer->m_IsReadyToPlay ? "" : "Say '/r' to ready", m_NumPlayerNotReady);
+			str_format(aBuf, sizeof(aBuf), "%s\n\n\n%d 个玩家还没有准备好", pPlayer->m_IsReadyToPlay ? "" : "在聊天框发送 '/r' 以准备", m_NumPlayerNotReady);
 		GameServer()->SendBroadcast(aBuf, SnappingClient, false);
 		pState->m_NextBroadcastTick = Server()->Tick() + 5 * Server()->TickSpeed();
 		return;
@@ -1686,7 +1739,7 @@ void IGameController::FakeClientBroadcast(int SnappingClient)
 	case IGS_WARMUP_GAME:
 	case IGS_WARMUP_USER:
 		if(m_GameStateTimer == TIMER_INFINITE && pPlayer->GetTeam() != TEAM_SPECTATORS)
-			GameServer()->SendBroadcast("Waiting for more players", SnappingClient, false);
+			GameServer()->SendBroadcast("等待更多玩家...", SnappingClient, false);
 		else
 			GameServer()->SendBroadcast(" ", SnappingClient, false);
 		pState->m_NextBroadcastTick = Server()->Tick() + 5 * Server()->TickSpeed();
@@ -1701,13 +1754,13 @@ void IGameController::FakeClientBroadcast(int SnappingClient)
 		}
 		break;
 	case IGS_END_ROUND:
-		GameServer()->SendBroadcast("Round over", SnappingClient, false);
+		GameServer()->SendBroadcast("游戏结束！", SnappingClient, false);
 		pState->m_NextBroadcastTick = Server()->Tick() + 5 * Server()->TickSpeed();
 		break;
 	case IGS_GAME_RUNNING:
 		if(pPlayer->m_DeadSpecMode)
 		{
-			GameServer()->SendBroadcast("Wait for next round", SnappingClient, false);
+			GameServer()->SendBroadcast("等待此游戏完成", SnappingClient, false);
 			break;
 		}
 		GameServer()->SendBroadcast(" ", SnappingClient, false);
@@ -2586,7 +2639,7 @@ void IGameController::DoTeamChange(CPlayer *pPlayer, int Team, bool DoChatMsg)
 int IGameController::GetStartTeam()
 {
 	if(Config()->m_SvTournamentMode || (GameWorld()->Team() == 0 && Config()->m_SvRoom == 2))
-		return TEAM_SPECTATORS;
+		return TEAM_RED;
 
 	// determine new team
 	int Team = TEAM_RED;
@@ -2600,7 +2653,7 @@ int IGameController::GetStartTeam()
 	if(m_aTeamSize[TEAM_RED] + m_aTeamSize[TEAM_BLUE] < m_PlayerSlots)
 		return Team;
 
-	return TEAM_SPECTATORS;
+	return TEAM_RED;
 }
 
 const char *IGameController::GetTeamName(int Team)

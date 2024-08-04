@@ -1,0 +1,248 @@
+[2024-03-03 00:56:59][engine]: running on unix-linux-amd64
+[2024-03-03 00:56:59][engine]: arch is little endian
+[2024-03-03 00:56:59][storage]: added path '$USERDIR' ('/root/.teeworlds')
+[2024-03-03 00:56:59][storage]: added path '$DATADIR' ('data')
+[2024-03-03 00:56:59][storage]: added path '$CURRENTDIR' ('/home/ddnet-pvp')
+[2024-03-03 00:56:59][host_lookup]: host='localhost' port=0 1
+[2024-03-03 00:56:59][host_lookup]: host='localhost' port=0 2
+[2024-03-03 00:56:59][console]: executing 'autoexec.cfg'
+[2024-03-03 00:56:59][console]: moderator access for 'left' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'left' is now enabled
+[2024-03-03 00:56:59][console]: user access for 'left' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'right' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'right' is now enabled
+[2024-03-03 00:56:59][console]: user access for 'right' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'up' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'up' is now enabled
+[2024-03-03 00:56:59][console]: user access for 'up' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'down' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'down' is now enabled
+[2024-03-03 00:56:59][console]: user access for 'down' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'super' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'super' is now enabled
+[2024-03-03 00:56:59][console]: user access for 'super' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'unsuper' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'unsuper' is now enabled
+[2024-03-03 00:56:59][console]: user access for 'unsuper' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'tele' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'tele' is now enabled
+[2024-03-03 00:56:59][console]: user access for 'tele' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'totele' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'totele' is now enabled
+[2024-03-03 00:56:59][console]: user access for 'totele' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'totelecp' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'totelecp' is now enabled
+[2024-03-03 00:56:59][console]: user access for 'totelecp' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'logout' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'logout' is now enabled
+[2024-03-03 00:56:59][console]: user access for 'logout' is now disabled
+[2024-03-03 00:56:59][console]: No such command: 'ninja'.
+[2024-03-03 00:56:59][console]: No such command: 'grenade'.
+[2024-03-03 00:56:59][console]: No such command: 'shotgun'.
+[2024-03-03 00:56:59][console]: No such command: 'laser'.
+[2024-03-03 00:56:59][console]: No such command: 'weapons'.
+[2024-03-03 00:56:59][console]: No such command: 'unweapons'.
+[2024-03-03 00:56:59][console]: No such command: 'unlaser'.
+[2024-03-03 00:56:59][console]: No such command: 'unshotgun'.
+[2024-03-03 00:56:59][console]: No such command: 'ungrenade'.
+[2024-03-03 00:56:59][console]: moderator access for 'unsolo' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'unsolo' is now enabled
+[2024-03-03 00:56:59][console]: user access for 'unsolo' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'undeep' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'undeep' is now enabled
+[2024-03-03 00:56:59][console]: user access for 'undeep' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'status' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'status' is now enabled
+[2024-03-03 00:56:59][console]: user access for 'status' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'ban' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'ban' is now disabled
+[2024-03-03 00:56:59][console]: user access for 'ban' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'unban' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'unban' is now disabled
+[2024-03-03 00:56:59][console]: user access for 'unban' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'ban_range' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'ban_range' is now disabled
+[2024-03-03 00:56:59][console]: user access for 'ban_range' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'unban_range' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'unban_range' is now disabled
+[2024-03-03 00:56:59][console]: user access for 'unban_range' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'unban_all' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'unban_all' is now disabled
+[2024-03-03 00:56:59][console]: user access for 'unban_all' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'bans' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'bans' is now disabled
+[2024-03-03 00:56:59][console]: user access for 'bans' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'bans_save' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'bans_save' is now disabled
+[2024-03-03 00:56:59][console]: user access for 'bans_save' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'kick' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'kick' is now disabled
+[2024-03-03 00:56:59][console]: user access for 'kick' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'force_vote' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'force_vote' is now disabled
+[2024-03-03 00:56:59][console]: user access for 'force_vote' is now disabled
+[2024-03-03 00:56:59][console]: moderator access for 'moderate' is now enabled
+[2024-03-03 00:56:59][console]: helper access for 'moderate' is now disabled
+[2024-03-03 00:56:59][console]: user access for 'moderate' is now disabled
+[2024-03-03 00:56:59][server]: starting...
+[2024-03-03 00:56:59][datafile]: loading. filename='maps/mega_std_collection.map'
+[2024-03-03 00:56:59][datafile]: allocsize=34036
+[2024-03-03 00:56:59][datafile]: readsize=32012
+[2024-03-03 00:56:59][datafile]: swaplen=32032
+[2024-03-03 00:56:59][datafile]: item_size=28536
+[2024-03-03 00:56:59][datafile]: loading done. datafile='maps/mega_std_collection.map'
+[2024-03-03 00:56:59][server]: maps/mega_std_collection.map sha256 is 9452c2203666c5d8672fef1dd7bc73681db83208362306bee79448c528644a44
+[2024-03-03 00:56:59][sixup]: maps7/mega_std_collection.map sha256 is 4310d26d825eeb83cbea922a9c2bee85570817d3783cea2dc7a01fd05337435e
+[2024-03-03 00:56:59][server]: server name is '「棉裤普通服」独孤求败 LMS-EX'
+[2024-03-03 00:56:59][datafile]: loading data index=176 size=17287 uncompressed=1393856
+[2024-03-03 00:56:59][datafile]: loading data index=178 size=4168 uncompressed=2090784
+[2024-03-03 00:56:59][console]: executing 'maps/mega_std_collection.map.cfg'
+[2024-03-03 00:56:59][console]: executing 'room_config/modes/lms.rcfg'
+[2024-03-03 00:56:59][instance 0]: executing 'room_config/modes/lms.rcfg'
+[2024-03-03 00:56:59][console]: executing 'room_config/modes.rcfg'
+[2024-03-03 00:56:59][instance 0]: executing 'room_config/modes.rcfg'
+[2024-03-03 00:56:59][console]: executing 'room_config/maps/all.rcfg'
+[2024-03-03 00:56:59][instance 0]: executing 'room_config/maps/all.rcfg'
+[2024-03-03 00:56:59][console]: executing 'room_config/lobby.rcfg'
+[2024-03-03 00:56:59][instance 0]: executing 'room_config/lobby.rcfg'
+[2024-03-03 00:56:59][team]: game controller 0 is created
+[2024-03-03 00:56:59][server]: version 0.6 626fce9a778df4d4
+[2024-03-03 00:56:59][engine/mastersrv]: refreshing master server addresses
+[2024-03-03 00:56:59][host_lookup]: host='master1.teeworlds.com' port=0 3
+[2024-03-03 00:56:59][register]: refreshing ip addresses
+[2024-03-03 00:56:59][regsixup]: refreshing ip addresses
+[2024-03-03 00:56:59][host_lookup]: host='master2.teeworlds.com' port=0 3
+[2024-03-03 00:57:00][host_lookup]: host='master3.teeworlds.com' port=0 3
+[2024-03-03 00:57:01][host_lookup]: host='master4.teeworlds.com' port=0 3
+[2024-03-03 00:57:02][engine/mastersrv]: saving addresses
+[2024-03-03 00:57:02][register]: fetching server counts
+[2024-03-03 00:57:02][regsixup]: fetching server counts
+[2024-03-03 00:57:02][server]: player is ready. ClientID=0 addr=<{175.0.226.62:39183}> secure=yes
+[2024-03-03 00:57:03][server]: player has entered the game. ClientID=0 addr=<{175.0.226.62:39183}> sixup=0
+[2024-03-03 00:57:03][ddnet]: cid=0 version=18003
+[2024-03-03 00:57:03][game]: team size increased to 1, team='0', ddrteam='0'
+[2024-03-03 00:57:03][game]: ddrteam_join player='0:棉裤' team=0 ddrteam='0'
+[2024-03-03 00:57:03][chat]: *** '棉裤' entered and joined the game in LMS-EX room 0
+[2024-03-03 00:57:03][game]: team_join player='0:棉裤' team=0
+[2024-03-03 00:57:05][regsixup]: chose 'master2.teeworlds.com' as master, sending heartbeats
+[2024-03-03 00:57:06][chat-command]: 0 used /timeout V6KW2YePHkkkfRTT
+[2024-03-03 00:57:07][register]: chose 'master3.teeworlds.com' as master, sending heartbeats
+[2024-03-03 00:57:07][regsixup]: no firewall/nat problems detected
+[2024-03-03 00:57:07][regsixup]: server registered
+[2024-03-03 00:57:09][register]: no firewall/nat problems detected
+[2024-03-03 00:57:09][register]: server registered
+[2024-03-03 00:57:10][server]: client dropped. cid=0 addr=<{175.0.226.62:39183}> reason=''
+[2024-03-03 00:57:10][game]: ddrteam_leave player='0:棉裤' ddrteam='0'
+[2024-03-03 00:57:10][game]: team size decreased to 0, team='0', ddrteam='0'
+[2024-03-03 00:57:10][game]: kill killer='0:棉裤' victim='0:棉裤' weapon=-3 special=0
+[2024-03-03 00:57:10][chat]: *** '棉裤' has left the game
+[2024-03-03 00:57:10][game]: leave player='0:棉裤'
+[2024-03-03 00:57:10][game]: world cleared, ddrteam='0'
+[2024-03-03 01:27:56][engine/mastersrv]: refreshing master server addresses
+[2024-03-03 01:27:56][register]: refreshing ip addresses
+[2024-03-03 01:27:56][host_lookup]: host='master1.teeworlds.com' port=0 3
+[2024-03-03 01:27:56][host_lookup]: host='master2.teeworlds.com' port=0 3
+[2024-03-03 01:27:57][host_lookup]: host='master3.teeworlds.com' port=0 3
+[2024-03-03 01:27:57][host_lookup]: host='master4.teeworlds.com' port=0 3
+[2024-03-03 01:27:58][engine/mastersrv]: saving addresses
+[2024-03-03 01:27:58][register]: fetching server counts
+[2024-03-03 01:28:04][register]: chose 'master3.teeworlds.com' as master, sending heartbeats
+[2024-03-03 01:28:09][register]: no firewall/nat problems detected
+[2024-03-03 01:28:09][register]: server registered
+[2024-03-03 01:29:15][engine/mastersrv]: refreshing master server addresses
+[2024-03-03 01:29:15][regsixup]: refreshing ip addresses
+[2024-03-03 01:29:15][host_lookup]: host='master1.teeworlds.com' port=0 3
+[2024-03-03 01:29:15][host_lookup]: host='master2.teeworlds.com' port=0 3
+[2024-03-03 01:29:16][host_lookup]: host='master3.teeworlds.com' port=0 3
+[2024-03-03 01:29:16][host_lookup]: host='master4.teeworlds.com' port=0 3
+[2024-03-03 01:29:18][engine/mastersrv]: saving addresses
+[2024-03-03 01:29:18][regsixup]: fetching server counts
+[2024-03-03 01:29:23][regsixup]: chose 'master3.teeworlds.com' as master, sending heartbeats
+[2024-03-03 01:29:24][regsixup]: no firewall/nat problems detected
+[2024-03-03 01:29:24][regsixup]: server registered
+[2024-03-03 01:46:10][server]: player is ready. ClientID=0 addr=<{27.187.155.22:1499}> secure=yes
+[2024-03-03 01:46:11][server]: player has entered the game. ClientID=0 addr=<{27.187.155.22:1499}> sixup=0
+[2024-03-03 01:46:11][ddnet]: cid=0 version=18003
+[2024-03-03 01:46:11][game]: team size increased to 1, team='0', ddrteam='0'
+[2024-03-03 01:46:11][game]: ddrteam_join player='0:杀杀杀手杀' team=0 ddrteam='0'
+[2024-03-03 01:46:11][chat]: *** '杀杀杀手杀' entered and joined the game in LMS-EX room 0
+[2024-03-03 01:46:11][game]: team_join player='0:杀杀杀手杀' team=0
+[2024-03-03 01:46:14][chat-command]: 0 used /timeout L9YoKETp2RbEq25D
+[2024-03-03 01:46:22][info]: DDNet PvP Mod. Version: 0.6.4, 15.4p
+[2024-03-03 01:46:22][info]: Git revision hash: 7dc4c18ce132db14
+[2024-03-03 01:46:22][info]: Official site: DDNet.tw
+[2024-03-03 01:46:22][info]: For more info: /cmdlist
+[2024-03-03 01:46:22][chat-command]: 0 used /info
+[2024-03-03 01:46:27][server]: client dropped. cid=0 addr=<{27.187.155.22:1499}> reason=''
+[2024-03-03 01:46:27][game]: ddrteam_leave player='0:杀杀杀手杀' ddrteam='0'
+[2024-03-03 01:46:27][game]: team size decreased to 0, team='0', ddrteam='0'
+[2024-03-03 01:46:27][game]: kill killer='0:杀杀杀手杀' victim='0:杀杀杀手杀' weapon=-3 special=0
+[2024-03-03 01:46:27][chat]: *** '杀杀杀手杀' has left the game
+[2024-03-03 01:46:27][game]: leave player='0:杀杀杀手杀'
+[2024-03-03 01:46:28][game]: world cleared, ddrteam='0'
+[2024-03-03 01:59:01][engine/mastersrv]: refreshing master server addresses
+[2024-03-03 01:59:01][register]: refreshing ip addresses
+[2024-03-03 01:59:01][host_lookup]: host='master1.teeworlds.com' port=0 3
+[2024-03-03 01:59:01][host_lookup]: host='master2.teeworlds.com' port=0 3
+[2024-03-03 01:59:01][host_lookup]: host='master3.teeworlds.com' port=0 3
+[2024-03-03 01:59:01][host_lookup]: host='master4.teeworlds.com' port=0 3
+[2024-03-03 01:59:03][engine/mastersrv]: saving addresses
+[2024-03-03 01:59:03][register]: fetching server counts
+[2024-03-03 01:59:08][register]: chose 'master3.teeworlds.com' as master, sending heartbeats
+[2024-03-03 01:59:09][register]: no firewall/nat problems detected
+[2024-03-03 01:59:09][register]: server registered
+[2024-03-03 02:00:16][engine/mastersrv]: refreshing master server addresses
+[2024-03-03 02:00:16][regsixup]: refreshing ip addresses
+[2024-03-03 02:00:16][host_lookup]: host='master1.teeworlds.com' port=0 3
+[2024-03-03 02:00:16][host_lookup]: host='master2.teeworlds.com' port=0 3
+[2024-03-03 02:00:17][host_lookup]: host='master3.teeworlds.com' port=0 3
+[2024-03-03 02:00:18][host_lookup]: host='master4.teeworlds.com' port=0 3
+[2024-03-03 02:00:18][engine/mastersrv]: saving addresses
+[2024-03-03 02:00:18][regsixup]: fetching server counts
+[2024-03-03 02:00:22][regsixup]: chose 'master2.teeworlds.com' as master, sending heartbeats
+[2024-03-03 02:00:28][regsixup]: no firewall/nat problems detected
+[2024-03-03 02:00:28][regsixup]: server registered
+[2024-03-03 02:29:52][engine/mastersrv]: refreshing master server addresses
+[2024-03-03 02:29:52][register]: refreshing ip addresses
+[2024-03-03 02:29:52][host_lookup]: host='master1.teeworlds.com' port=0 3
+[2024-03-03 02:29:52][host_lookup]: host='master2.teeworlds.com' port=0 3
+[2024-03-03 02:29:52][host_lookup]: host='master3.teeworlds.com' port=0 3
+[2024-03-03 02:29:52][host_lookup]: host='master4.teeworlds.com' port=0 3
+[2024-03-03 02:29:53][engine/mastersrv]: saving addresses
+[2024-03-03 02:29:53][register]: fetching server counts
+[2024-03-03 02:29:59][register]: chose 'master3.teeworlds.com' as master, sending heartbeats
+[2024-03-03 02:30:04][register]: no firewall/nat problems detected
+[2024-03-03 02:30:04][register]: server registered
+[2024-03-03 02:32:00][engine/mastersrv]: refreshing master server addresses
+[2024-03-03 02:32:00][regsixup]: refreshing ip addresses
+[2024-03-03 02:32:00][host_lookup]: host='master1.teeworlds.com' port=0 3
+[2024-03-03 02:32:00][host_lookup]: host='master2.teeworlds.com' port=0 3
+[2024-03-03 02:32:00][host_lookup]: host='master3.teeworlds.com' port=0 3
+[2024-03-03 02:32:01][host_lookup]: host='master4.teeworlds.com' port=0 3
+[2024-03-03 02:32:02][engine/mastersrv]: saving addresses
+[2024-03-03 02:32:02][regsixup]: fetching server counts
+[2024-03-03 02:32:04][regsixup]: chose 'master2.teeworlds.com' as master, sending heartbeats
+[2024-03-03 02:32:08][regsixup]: no firewall/nat problems detected
+[2024-03-03 02:32:08][regsixup]: server registered
+[2024-03-03 03:00:57][engine/mastersrv]: refreshing master server addresses
+[2024-03-03 03:00:57][register]: refreshing ip addresses
+[2024-03-03 03:00:57][host_lookup]: host='master1.teeworlds.com' port=0 3
+[2024-03-03 03:00:57][host_lookup]: host='master2.teeworlds.com' port=0 3
+[2024-03-03 03:00:57][host_lookup]: host='master3.teeworlds.com' port=0 3
+[2024-03-03 03:00:57][host_lookup]: host='master4.teeworlds.com' port=0 3
+[2024-03-03 03:00:58][engine/mastersrv]: saving addresses
+[2024-03-03 03:00:58][register]: fetching server counts
+[2024-03-03 03:01:04][register]: chose 'master3.teeworlds.com' as master, sending heartbeats
+[2024-03-03 03:01:10][register]: no firewall/nat problems detected
+[2024-03-03 03:01:10][register]: server registered
+[2024-03-03 03:04:00][engine/mastersrv]: refreshing master server addresses
+[2024-03-03 03:04:00][regsixup]: refreshing ip addresses
+[2024-03-03 03:04:00][host_lookup]: host='master1.teeworlds.com' port=0 3
+[2024-03-03 03:04:00][host_lookup]: host='master2.teeworlds.com' port=0 3
+[2024-03-03 03:04:00][host_lookup]: host='master3.teeworlds.com' port=0 3
+[2024-03-03 03:04:00][host_lookup]: host='master4.teeworlds.com' port=0 3
+[2024-03-03 03:04:01][engine/mastersrv]: saving addresses
+[2024-03-03 03:04:01][regsixup]: fetching server counts
+[2024-03-03 03:04:04][regsixup]: chose 'master1.teeworlds.com' as master, sending heartbeats
+[2024-03-03 03:04:09][regsixup]: no firewall/nat problems detected
+[2024-03-03 03:04:09][regsixup]: server registered

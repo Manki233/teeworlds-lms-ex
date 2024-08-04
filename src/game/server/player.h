@@ -148,6 +148,8 @@ public:
 		int m_Max;
 	} m_Latency;
 
+	int m_PickWeapons [6] = {0, 1, 2, 3, 4, 5};
+
 private:
 	CCharacter *m_pCharacter;
 	int m_NumInputs;

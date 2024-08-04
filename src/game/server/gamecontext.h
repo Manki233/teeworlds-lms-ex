@@ -93,6 +93,10 @@ class CGameContext : public IGameServer
 	CUuid m_GameUuid;
 	CPrng m_Prng;
 
+	static void ConShowWeapons(IConsole::IResult *pResult, void *pUserData);
+
+	static void ConSwitchWeapon(IConsole::IResult *pResult, void *pUserData);
+
 	static void ConTuneParam(IConsole::IResult *pResult, void *pUserData);
 	static void ConToggleTuneParam(IConsole::IResult *pResult, void *pUserData);
 	static void ConTuneReset(IConsole::IResult *pResult, void *pUserData);

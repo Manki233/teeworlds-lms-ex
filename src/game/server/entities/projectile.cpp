@@ -28,6 +28,7 @@ CProjectile::CProjectile(
 {
 	m_Type = WeaponType;
 	m_Pos = Pos;
+	PrePos = Pos;
 	m_Direction = Dir;
 	m_LifeSpan = Span;
 	m_TotalLifeSpan = Span;
@@ -56,6 +57,8 @@ CProjectile::CProjectile(
 	m_TuneZone = GameServer()->Collision()->IsTune(GameServer()->Collision()->GetMapIndex(m_Pos));
 	m_HitMask = 0;
 	GameWorld()->InsertEntity(this);
+
+	isGetTarget = false;
 }
 
 CProjectile::~CProjectile()
@@ -118,30 +121,47 @@ void CProjectile::GetProjectileProperties(float *pCurvature, float *pSpeed)
 
 vec2 CProjectile::GetPos(float Time)
 {
+	if (isGetTarget) {
+		return PrePos;
+	}
+	
 	float Curvature = 0;
 	float Speed = 0;
 	GetProjectileProperties(&Curvature, &Speed);
 	return CalcPos(m_Pos, m_Direction, Curvature, Speed, Time);
 }
 
+vec2 GetPosEx(CProjectile *thi, float Time, vec2 pos)
+{
+	float Curvature = 0;
+	float Speed = 0;
+	thi -> GetProjectileProperties(&Curvature, &Speed);
+	return CalcPos(pos, thi -> m_Direction, Curvature, Speed, Time);
+}
+
 void CProjectile::Tick()
 {
-	
-	float Pt = (Server()->Tick() - m_StartTick - 1) / (float)Server()->TickSpeed();
-	float Ct = (Server()->Tick() - m_StartTick) / (float)Server()->TickSpeed();
-	vec2 PrevPos = GetPos(Pt);
-	vec2 CurPos = GetPos(Ct);
-	vec2 ColPos;
-	vec2 NewPos;
-	int Collide = GameServer()->Collision()->IntersectLine(PrevPos, CurPos, &ColPos, &NewPos);
 	CCharacter *pOwnerChar = nullptr;
 	CPlayer *pOwnerPlayer = nullptr;
-
 	if(m_Owner >= 0)
 	{
 		pOwnerChar = GameServer()->GetPlayerChar(m_Owner);
 		pOwnerPlayer = GameServer()->m_apPlayers[m_Owner];
 	}
+
+	vec2 PrevPos;
+	vec2 CurPos;
+
+	float Pt = (Server()->Tick() - m_StartTick - 1) / (float)Server()->TickSpeed();
+	float Ct = (Server()->Tick() - m_StartTick) / (float)Server()->TickSpeed();
+
+	PrevPos = GetPos(Pt);
+	CurPos = GetPos(Ct);
+	PrePos = PrevPos;
+	
+	vec2 ColPos;
+	vec2 NewPos;
+	int Collide = GameServer()->Collision()->IntersectLine(PrevPos, CurPos, &ColPos, &NewPos);
 
 	std::list<CCharacter *> pTargetChars;
 
@@ -260,19 +280,6 @@ void CProjectile::Tick()
 		m_Pos = GameServer()->Collision()->TelePos(z - 1);
 		m_StartTick = Server()->Tick();
 	}
-
-	CCharacter *apEnts[MAX_CLIENTS];
-
-	int Num = GameWorld()->FindEntities(m_Pos, GetProximityRadius() * 5.0f, (CEntity **)apEnts,
-		MAX_CLIENTS, CGameWorld::ENTTYPE_CHARACTER);
-	
-	for (int i = 0 ; i < Num ; i ++){
-		if (apEnts [i] != GameServer()->GetPlayerChar(m_Owner)) {
-			m_Direction = normalize(apEnts [0] -> m_Core. m_Pos);
-		}
-	}
-
-	dbg_msg("game", "%d", Num);
 }
 
 void CProjectile::TickPaused()

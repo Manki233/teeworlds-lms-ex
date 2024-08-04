@@ -430,7 +430,7 @@ void CGameContext::ConInviteTeam(IConsole::IResult *pResult, void *pUserData)
 		pSelf->m_apPlayers[pResult->m_ClientID]->m_LastInvited = pSelf->Server()->Tick();
 
 		char aBuf[512];
-		str_format(aBuf, sizeof aBuf, "'%s' invited you to team %d.", pSelf->Server()->ClientName(pResult->m_ClientID), Team);
+		str_format(aBuf, sizeof aBuf, "'%s' 邀请你去 %d 房间.", pSelf->Server()->ClientName(pResult->m_ClientID), Team);
 		pSelf->SendChatTarget(Target, aBuf);
 
 		str_format(aBuf, sizeof aBuf, "'%s' invited '%s' to your team.", pSelf->Server()->ClientName(pResult->m_ClientID), pSelf->Server()->ClientName(Target));
@@ -872,6 +872,80 @@ void CGameContext::ConInstanceCommand(IConsole::IResult *pResult, void *pUserDat
 	{
 		Instance.m_pController->InstanceConsole()->ExecuteLine("cmdlist");
 	}
+}
+
+const int WEAPONSNUMBER = 12;
+
+const char* WeaponName [WEAPONSNUMBER + 1] = {
+	"", "Hammer+   锤子+", "Plstfreezel  冰枪", "Shotguper  超霰", "Grenadealth 血炮", "Gatling Laser  加特林激光", "Plammer  等离子锤体", "Exploding Laser 激炸", "Sleech Gun   吸血鬼霰弹", "Exploding Hammer 锤炸", "Plastolma 枪离子场", "Greambeam  球状榴弹", "Lareaser 重载激活"
+};
+
+void CGameContext::ConShowWeapons(IConsole::IResult *pResult, void *pUserData)
+{
+	CGameContext *pSelf = (CGameContext *)pUserData;
+	int ClientID = pResult->m_ClientID;
+
+	if (pResult->NumArguments()) {
+		const char *pTarget = pResult->GetString(0);
+
+		for (int i = 0 ; i < MAX_CLIENTS ; i ++) {
+			CPlayer *player = pSelf->m_apPlayers[i];
+			
+			if (player && !strcmp(pSelf->Server()->ClientName(player->GetCID()), pTarget)) {
+				ClientID = i;
+			}
+		}
+	}
+
+	if(!CheckClientID(ClientID))
+		return;
+
+	CPlayer *pPlayer = pSelf->m_apPlayers[ClientID];
+
+	char aBuf[256];
+	SGameInstance Instance = pSelf->PlayerGameInstance(ClientID);
+	Instance.m_pController->InstanceConsole()->SetFlagMask(CFGFLAG_CHAT);
+
+	for (int i = 1 ; i <= 5 ; i ++)
+	{
+		str_format(aBuf, sizeof(aBuf), "%s 的武器 [%d] = ID: %d | Name = %s", pSelf->Server()->ClientName(ClientID), i, pPlayer->m_PickWeapons [i], WeaponName [pPlayer->m_PickWeapons [i]]);
+		Instance.m_pController->SendChatTarget(pResult->m_ClientID, aBuf);
+	}
+}
+
+const int id_map_place [WEAPONSNUMBER + 1] = {
+	0, 1, 2, 3, 4, 5, 1, 5, 3, 1, 2, 4, 5
+};
+
+
+void CGameContext::ConSwitchWeapon(IConsole::IResult *pResult, void *pUserData)
+{
+	CGameContext *pSelf = (CGameContext *)pUserData;
+	int ClientID = pResult->m_ClientID;
+	
+	int weapon = pResult->GetInteger(0);
+	int place = id_map_place [weapon];
+
+	if(!CheckClientID(ClientID))
+		return;
+
+	CPlayer *pPlayer = pSelf->m_apPlayers[ClientID];
+	if(!pPlayer || weapon > WEAPONSNUMBER)
+		return;
+	char aBuf[256];
+	SGameInstance Instance = pSelf->PlayerGameInstance(ClientID);
+	Instance.m_pController->InstanceConsole()->SetFlagMask(CFGFLAG_CHAT);
+
+	str_format(aBuf, sizeof(aBuf), "你的第 %d 个武器 [ID: %d | Name = %s] 被替换成了 [ID: %d | Name = %s] ", 
+		place, 
+		pPlayer->m_PickWeapons [place],
+		WeaponName [pPlayer->m_PickWeapons [place]],
+		weapon,
+		WeaponName [weapon]
+	);
+
+	pPlayer->m_PickWeapons [place] = weapon;
+	Instance.m_pController->SendChatTarget(ClientID, aBuf);
 }
 
 bool CheckClientID(int ClientID)

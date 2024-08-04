@@ -36,8 +36,11 @@ public:
 	virtual void Snap(int SnappingClient, int OtherMode) override;
 	virtual void Destroy() override;
 
-private:
 	vec2 m_Direction;
+
+	bool isGetTarget;
+
+private:
 	int m_TotalLifeSpan;
 	int m_Owner;
 	int m_StartTick;
@@ -54,6 +57,8 @@ private:
 	int m_NumHits;
 
 	SEntityCustomData m_CustomData;
+
+	vec2 PrePos;
 
 public:
 	int m_Type;

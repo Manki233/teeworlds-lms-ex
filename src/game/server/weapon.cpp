@@ -21,7 +21,7 @@ CWeapon::CWeapon(CCharacter *pOwnerChar)
 }
 
 void CWeapon::Tick()
-{
+{	
 	if(m_ReloadTimer > 0)
 	{
 		m_ReloadTimer--;
@@ -47,6 +47,13 @@ void CWeapon::Tick()
 			m_AmmoRegenStart = -1;
 		}
 	}
+
+	OnTick();
+}
+
+void CWeapon::OnTick()
+{
+	Character()->m_DamageScale = 1.0f;
 }
 
 void CWeapon::TickPaused()

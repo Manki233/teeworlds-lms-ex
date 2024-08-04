@@ -1,4 +1,6 @@
 # lobby override config
 
 # no warmup for room 0
-warmup 0
+warmup 60
+
+add_vote "Change Gamemode: Last Man Standing" "gametype lms"

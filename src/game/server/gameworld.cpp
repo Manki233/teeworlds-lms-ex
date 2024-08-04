@@ -387,7 +387,7 @@ void CGameWorld::CreateExplosionParticle(vec2 Pos, int64 Mask)
 	}
 }
 
-void CGameWorld::CreateExplosion(vec2 Pos, int Owner, int Weapon, int WeaponID, int MaxDamage, bool NoKnockback, int64 Mask)
+void CGameWorld::CreateExplosion(vec2 Pos, int Owner, int Weapon, int WeaponID, int MaxDamage, bool NoKnockback, int64 Mask, bool owner)
 {
 	// create the event
 	CreateExplosionParticle(Pos, Mask);
@@ -417,6 +417,9 @@ void CGameWorld::CreateExplosion(vec2 Pos, int Owner, int Weapon, int WeaponID, 
 		if(int(Knockback) == 0 && int(Dmg) == 0)
 			continue;
 
+		if(owner && apEnts[i]->GetPlayer()->GetCID() == Owner)
+			continue;
+		
 		if(NoKnockback)
 			apEnts[i]->TakeDamage({0.0f, 0.0f}, (int)Dmg, Owner, Weapon, WeaponID, true);
 		else

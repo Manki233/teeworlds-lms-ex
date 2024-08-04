@@ -5,9 +5,9 @@
 CPistol::CPistol(CCharacter *pOwnerChar) :
 	CWeapon(pOwnerChar)
 {
-	m_MaxAmmo = g_pData->m_Weapons.m_aId[WEAPON_GUN].m_Maxammo;
-	m_AmmoRegenTime = g_pData->m_Weapons.m_aId[WEAPON_GUN].m_Ammoregentime;
-	m_FireDelay = g_pData->m_Weapons.m_aId[WEAPON_GUN].m_Firedelay;
+	m_MaxAmmo = 5;
+	m_AmmoRegenTime = 900;
+	m_FireDelay = 100;
 }
 
 bool CPistol::BulletCollide(CProjectile *pProj, vec2 Pos, CCharacter *pHit, bool EndOfLife)
@@ -18,6 +18,7 @@ bool CPistol::BulletCollide(CProjectile *pProj, vec2 Pos, CCharacter *pHit, bool
 			return false;
 
 		pHit->TakeDamage(vec2(0, 0), g_pData->m_Weapons.m_aId[WEAPON_GUN].m_Damage, pProj->GetOwner(), WEAPON_GUN, pProj->GetWeaponID(), false);
+		pHit->Freeze(0.5);
 	}
 
 	return true;

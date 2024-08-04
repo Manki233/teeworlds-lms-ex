@@ -954,12 +954,18 @@ set_src(GAME_SERVER GLOB_RECURSE src/game/server
   entities/pickup.h
   entities/plasma.cpp
   entities/plasma.h
+  entities/wall.cpp
+  entities/wall.h
+  entities/circle.cpp
+  entities/circle.h
   entities/projectile.cpp
   entities/projectile.h
   entities/textentity.cpp
   entities/textentity.h
   entity.cpp
   entity.h
+  giveweapons.h
+  giveweapons.cpp
   eventhandler.cpp
   eventhandler.h
   gamecontext.cpp
@@ -996,16 +1002,28 @@ set_src(GAME_SERVER GLOB_RECURSE src/game/server
   weapons/explodinglaser.h
   weapons/grenade.cpp
   weapons/grenade.h
+  weapons/mgrenade.cpp
+  weapons/mgrenade.h
   weapons/hammer.cpp
   weapons/hammer.h
   weapons/lasergun.cpp
   weapons/lasergun.h
+  weapons/laserarea.cpp
+  weapons/laserarea.h
   weapons/ninja.cpp
   weapons/ninja.h
   weapons/pistol.cpp
   weapons/pistol.h
+  weapons/ppistol.cpp
+  weapons/ppistol.h
   weapons/shotgun.cpp
   weapons/shotgun.h
+  weapons/hshotgun.cpp
+  weapons/hshotgun.h
+  weapons/ehammer.cpp
+  weapons/ehammer.h
+  weapons/phammer.cpp
+  weapons/phammer.h
 )
 set(GAME_GENERATED_SERVER
   "src/game/generated/server_data.cpp"
